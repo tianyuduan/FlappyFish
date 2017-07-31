@@ -2,9 +2,9 @@
 
 ### Background
 
-This game will be an infinite runner type game based on Flappy bird, a side-scroller game where the player controls a bird, attempting to fly between rows of green pipes without hitting them. FlappyBird was the most downloaded game in the iOS App Store.
+This game will be an infinite runner type game based on Flappy Bird, a side-scroller game where the player controls a bird. The purpose of the game is to fly between rows of green pipes without hitting them. By the end of 2014, FlappyBird was the most downloaded game in the iOS App Store.
 
-FlappyFish is a one to two player game, that will utilize a 'game window' (most likely HTML 5 canvas element/easel.js?) for most of the game functionality, where the player will control a "fish". the rules of the games are as follows:
+FlappyFish is a one to two player game, that will utilize a 'game window' (most likely HTML 5 canvas element/easel.js?) for most of the game functionality, where the player will control a "Fish". The rules of the games are as follows:
 
 1. The user earns points over time.
 2. The user has one life. Lives are lost by bumping into obstacles.
@@ -35,6 +35,8 @@ FlappyFish players will be able to (outside of the in-game):
 
 ## Wireframes
 FlappyFish will be run on a single page, with a game window. Additionally, this page will contain links to my Linkedin and Github.
+
+![Wireframe for FlappyFish](./Wireframe-Main.png)
 
 ## Architecture and Technologies
 
