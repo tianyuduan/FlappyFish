@@ -40,7 +40,7 @@ FlappyFish will be run on a single page, with a game window. Additionally, this 
 
 - JavaScript for the game logic
 - Jquery for certain button inputs (or maybe my own GrabJS library)
-- HTML5 Canvas for rendering the platforms and the graphics
+- `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering
 - Webpack for bundling
 
 - PXloader?
