@@ -6,6 +6,7 @@ export const Environment = function(ctx, canvas) {
   this.bgSpeed = 2;
   this.bgWidth = 3000;
   this.bgImg = document.getElementById('bg');
+  this.song = document.getElementById('underthesea');
 };
 
 Environment.prototype.update = function() {

@@ -80,22 +80,14 @@ var _environment = __webpack_require__(3);
 
 window.onload = function () {
 
+  window.score = 0;
+
   var canvas = document.getElementById('canvas');
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
   var ctx = canvas.getContext('2d');
-
-  // ctx.fillRect(0, 0, 800, 200); // ctx.fillStyle = "#00FF00"; // // ctx.strokeRect(300, 20, 20, 20); // ctx.strokeStyle = "#FF0000";
-  // const fish1 = new Image();
-  // fish1.src = '../FlappyFish/images/382.png';
-  // fish1.onload = function() {
-  //   ctx.drawImage(fish1, 500, 20);
-  // };
-  //
-  // };
-
 
   var environment = new _environment.Environment(ctx, canvas);
   var fish = new _fish.Fish(300, 400, ctx);
@@ -105,6 +97,18 @@ window.onload = function () {
     var rockSet = generateRock(ctx, canvas.width, canvas.height);
     rocks.push(rockSet.top, rockSet.bottom);
   }, 500);
+
+  setInterval(function () {
+    if (!fish.dead) {
+      window.score++;
+      console.log(window.score);
+    }
+    ctx.font = "30px Verdana";
+    ctx.textAlign = 'center';
+    ctx.fillText('Score: ' + window.score, canvas.width / 3, canvas.height / 3);
+  }, 3000);
+
+  function drawScore() {}
 
   setInterval(function () {
     var rockSet = generateRock(ctx, canvas.width, canvas.height);
@@ -119,6 +123,7 @@ window.onload = function () {
 
   ctx.fillStyle = "#FFFFFF";
   function gameLoop() {
+    playMusic(ctx, true);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     environment.update();
     environment.render();
@@ -129,6 +134,7 @@ window.onload = function () {
     });
     if (fish.dead) {
       drawGameOver(ctx, canvas);
+      playMusic(ctx, false);
       return;
     }
 
@@ -158,6 +164,15 @@ function drawGameOver(ctx, canvas) {
   ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
 }
 
+function playMusic(ctx, play) {
+  var audio = document.getElementById('kellyfly');
+  if (play === true) {
+    return audio.play();
+  } else {
+    return audio.pause();
+  }
+}
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -181,13 +196,10 @@ var Fish = exports.Fish = function Fish(x, y, ctx) {
   this.dead = false;
   this.sprites = [document.getElementById('fish1'), document.getElementById('fish2'), document.getElementById('fish3'), document.getElementById('fish4'), document.getElementById('fish5'), document.getElementById('fish6'), document.getElementById('fish7'), document.getElementById('fish8')]; //do more later
   var self = this;
-
   window.addEventListener('keydown', function (e) {
-    //  console.log(e);
-    if (e.keyCode === 32) {
+    if (e.keyCode === 32 || e.keyCode === 38) {
       //up
       self.velY = -16;
-      //  console.log('spacebar');
     }
   });
 };
@@ -314,6 +326,7 @@ var Environment = exports.Environment = function Environment(ctx, canvas) {
   this.bgSpeed = 2;
   this.bgWidth = 3000;
   this.bgImg = document.getElementById('bg');
+  this.song = document.getElementById('underthesea');
 };
 
 Environment.prototype.update = function () {

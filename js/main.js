@@ -3,7 +3,13 @@ import { Rock } from './rock';
 import { Rock2 } from './rock2';
 import {Environment} from './environment';
 
+
+
+
+
 window.onload = function() {
+
+window.score = 0;
 
 const canvas = document.getElementById('canvas');
 
@@ -11,15 +17,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext('2d');
-
-// ctx.fillRect(0, 0, 800, 200); // ctx.fillStyle = "#00FF00"; // // ctx.strokeRect(300, 20, 20, 20); // ctx.strokeStyle = "#FF0000";
-// const fish1 = new Image();
-// fish1.src = '../FlappyFish/images/382.png';
-// fish1.onload = function() {
-//   ctx.drawImage(fish1, 500, 20);
-// };
-//
-// };
 
 
 const environment = new Environment(ctx, canvas);
@@ -30,6 +27,22 @@ const rocks = [];
   let rockSet = generateRock(ctx, canvas.width, canvas.height);
   rocks.push(rockSet.top, rockSet.bottom);
 }, 500);
+
+
+setInterval( function(){
+  if (!fish.dead){
+  window.score++;
+  console.log(window.score);
+  }
+  ctx.font = "30px Verdana";
+  ctx.textAlign = 'center';
+  ctx.fillText(`Score: ${window.score}`, canvas.width/3, canvas.height/3);
+
+}, 3000);
+
+function drawScore() {
+
+}
 
 
  setInterval(function(){
@@ -47,6 +60,7 @@ gameLoop();
 
   ctx.fillStyle = "#FFFFFF";
 function gameLoop() {
+  playMusic(ctx, true);
   ctx.fillRect(0,0, canvas.width, canvas.height);
   environment.update();
   environment.render();
@@ -58,6 +72,7 @@ function gameLoop() {
   });
   if (fish.dead) {
     drawGameOver(ctx, canvas);
+    playMusic(ctx, false);
     return ;
   }
 
@@ -86,5 +101,14 @@ function drawGameOver(ctx, canvas) {
   ctx.font = "30px Verdana";
   ctx.textAlign = 'center';
   ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
+}
 
+function playMusic(ctx, play) {
+    let audio = document.getElementById('kellyfly');
+    if (play === true ) {
+      return audio.play();
+    }
+    else {
+      return audio.pause();
+    }
 }

@@ -19,13 +19,10 @@ export const Fish = function(x,y, ctx) {
  document.getElementById('fish8'),
  ];//do more later
  let self = this;
-
    window.addEventListener('keydown', function(e){
-    //  console.log(e);
-     if (e.keyCode === 32) {
+     if (e.keyCode === 32 || e.keyCode === 38) {
        //up
        self.velY = -16;
-      //  console.log('spacebar');
      }
    });
 };
