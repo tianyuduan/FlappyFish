@@ -1,25 +1,24 @@
-const Environment = function(ctx, canvas) {
+export const Environment = function(ctx, canvas) {
   this.canvas = canvas;
   this.ctx = ctx;
   this.bgPos = 0;
   this.fgPos = 0;
   this.bgSpeed = 2;
-  this.bgWidth = 500;
+  this.bgWidth = 3000;
   this.bgImg = document.getElementById('bg');
 };
 
 Environment.prototype.update = function() {
   this.bgPos -= this.bgSpeed;
-  if (this.bgPos < - this.bgWidth)
+  if (this.bgPos  < - this.bgWidth + 1400)
     this.bgPos = 0;
 };
 
 Environment.prototype.render = function() {
 
-  ctx.drawImage(this.bgImg, this.bgPos, 0);
-  for (let i = 0; i < canvas.width/this.bgWidth; i++) {
+  for (let i = 0; i <= this.canvas.width/this.bgWidth; i++) {
+    //canvas == innerWidth(1500) / 1280 ~ ~2
+    this.ctx.drawImage(this.bgImg, this.bgPos+i*this.bgWidth, 0);
 
    }
 };
-
-const environment = new Environment();
