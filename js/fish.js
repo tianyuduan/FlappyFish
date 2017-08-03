@@ -31,7 +31,7 @@ Fish.prototype.update = function(rocks) {
   this.y += this.velY;
   this.velY += 1;
   if (this.detectCollision(rocks)) {
-      this.dead = true;
+      // this.dead = true;
   }
   if (this.dead) {
     return;

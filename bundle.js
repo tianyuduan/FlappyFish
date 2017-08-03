@@ -81,19 +81,52 @@ var _environment = __webpack_require__(4);
 window.onload = function () {
 
   //constructor
+  //game logic
   window.score = 0;
   var canvas = document.getElementById('canvas');
   canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.height = 600;
+  var ctx = canvas.getContext('2d');
 
+  //score
   var canvas2 = document.getElementById('canvas2');
   canvas2.width = window.innerWidth;
-  canvas2.height = window.innerHeight;
+  canvas2.height = 600;
   var ctx2 = canvas2.getContext('2d');
 
-  // ctx2.font = '48px serif';
-  // ctx2.fillText('Hello world', 500, 500);
-  fadeOut("Skyfish The Flying Fish", canvas2, ctx2);
+  //lyrics
+  var canvas3 = document.getElementById('canvas3');
+  canvas3.width = window.innerWidth;
+  canvas3.height = 600;
+  var ctx3 = canvas3.getContext('2d');
+
+  ctx2.font = '48px serif';
+  ctx2.fillText('Hello world', 500, 500);
+
+  var gameStarted = false;
+
+  document.body.addEventListener("keydown", function (event) {
+
+    if (event.keyCode === 13 && !gameStarted) {
+      gameLoop();
+    }
+    introScreen();
+  });
+
+  function introScreen() {
+
+    ctx.font = "50px Impact";
+    ctx.fillStyle = "#0099CC";
+    ctx.textAlign = "center";
+
+    canvas.width = window.innerWidth;
+    canvas.height = 600;
+
+    ctx.font = "40px Arial";
+    ctx.fillText("Flappy Fish", canvas.width / 2, canvas.height / 2);
+
+    ctx.fillText("Press Enter To Start", canvas.width / 2, canvas.height / 2 + 50);
+  }
 
   setInterval(function () {
     if (!fish.dead) {
@@ -109,6 +142,20 @@ window.onload = function () {
     ctx2.fillText('Your Score: ' + window.score, canvas2.width / 10, canvas2.height / 1.1);
   }, 500);
 
+  fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
+  //Song Lyrics
+
+
+  setTimeout(function () {
+
+    fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
+  }, 41000);
+
+  setTimeout(function () {
+
+    fadeOutLyrics("Sometimes silence can seem so loud", canvas2, ctx2);
+  }, 47500);
+
   var gamePaused = false;
   //pause
   window.addEventListener('keydown', function (e) {
@@ -118,7 +165,6 @@ window.onload = function () {
     }
   });
 
-  var ctx = canvas.getContext('2d');
   var environment = new _environment.Environment(ctx, canvas);
   var fish = new _fish.Fish(300, 400, ctx);
   var rocks = [];
@@ -135,17 +181,15 @@ window.onload = function () {
     rocks.push(rockSet.top, rockSet.bottom);
   }, 3000);
 
-  playMusic(ctx, true);
-  gameLoop();
-
   /*
     Main Game Loop
   */
 
   ctx.fillStyle = "#FFFFFF";
   function gameLoop() {
+    gameStarted = true;
     if (gamePaused) return;
-
+    playMusic(ctx, true);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     environment.update();
     environment.render();
@@ -208,7 +252,39 @@ function fadeOut(text, canvas, context) {
       canvas.width = canvas.width;
       clearInterval(interval);
     }
-  }, 150);
+  }, 500);
+}
+
+function fadeOutLyrics(text, canvas, context) {
+  var alpha = 1.0,
+      // full opacity
+  interval = setInterval(function () {
+    canvas.width = canvas.width; // Clears the canvas
+    context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
+    context.font = "italic 36pt Arial";
+    context.fillText(text, 100, 500);
+    alpha = alpha - 0.05; // decrease opacity (fade out)
+    if (alpha < 0) {
+      canvas.width = canvas.width;
+      clearInterval(interval);
+    }
+  }, 500);
+}
+
+function fadeOutLyricsAppend(text, canvas, context) {
+  var alpha = 1.0,
+      // full opacity
+  interval = setInterval(function () {
+    canvas.width = canvas.width; // Clears the canvas
+    context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
+    context.font = "italic 36pt Arial";
+    context.fillText(text, 100, 700);
+    alpha = alpha - 0.3; // decrease opacity (fade out)
+    if (alpha < 0) {
+      canvas.width = canvas.width;
+      clearInterval(interval);
+    }
+  }, 500);
 }
 
 /***/ }),
@@ -246,7 +322,7 @@ Fish.prototype.update = function (rocks) {
   this.y += this.velY;
   this.velY += 1;
   if (this.detectCollision(rocks)) {
-    this.dead = true;
+    // this.dead = true;
   }
   if (this.dead) {
     return;
