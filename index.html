@@ -6,14 +6,19 @@
     </head>
     <style >
     body{
-      margin: 0
+      margin: 0;
+      overflow: hidden;
     }
     img {
       display: none;
     }
     </style>
     <body>
-      <canvas id="canvas"></canvas>
+
+        <canvas id="canvas" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+        <canvas id="canvas2" style="position: absolute; left: 0; top: 0; z-index: 1, border:1px solid #000000"
+        ></canvas>
+          </div>
       <img src="images/frame-1.png" id='fish1' alt="">
       <img src="images/frame-2.png" id='fish2' alt="">
       <img src="images/frame-3.png" id='fish3' alt="">

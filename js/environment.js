@@ -15,11 +15,10 @@ Environment.prototype.update = function() {
     this.bgPos = 0;
 };
 
-Environment.prototype.render = function() {
+Environment.prototype.render = function(canvas, ctx) {
 
   for (let i = 0; i <= this.canvas.width/this.bgWidth; i++) {
     //canvas == innerWidth(1500) / 1280 ~ ~2
     this.ctx.drawImage(this.bgImg, this.bgPos+i*this.bgWidth, 0);
-
    }
 };

@@ -74,21 +74,51 @@ var _fish = __webpack_require__(1);
 
 var _rock = __webpack_require__(2);
 
-var _rock2 = __webpack_require__(4);
+var _rock2 = __webpack_require__(3);
 
-var _environment = __webpack_require__(3);
+var _environment = __webpack_require__(4);
 
 window.onload = function () {
 
+  //constructor
   window.score = 0;
-
   var canvas = document.getElementById('canvas');
-
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  var ctx = canvas.getContext('2d');
+  var canvas2 = document.getElementById('canvas2');
+  canvas2.width = window.innerWidth;
+  canvas2.height = window.innerHeight;
+  var ctx2 = canvas2.getContext('2d');
 
+  // ctx2.font = '48px serif';
+  // ctx2.fillText('Hello world', 500, 500);
+  fadeOut("Skyfish The Flying Fish", canvas2, ctx2);
+
+  setInterval(function () {
+    if (!fish.dead) {
+      window.score++;
+    }
+    ctx2.font = "30px Verdana";
+    ctx2.textAlign = 'center';
+
+    ctx2.fillStyle = '#000000'; // or whatever color the background is.
+    ctx2.fillText('Score: ' + window.score, canvas2.width / 10, canvas2.height / 1.1);
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+    ctx2.fillStyle = '#ffffff'; // or whatever color the text should be.
+    ctx2.fillText('Your Score: ' + window.score, canvas2.width / 10, canvas2.height / 1.1);
+  }, 500);
+
+  var gamePaused = false;
+  //pause
+  window.addEventListener('keydown', function (e) {
+    console.log(e);
+    if (e.keyCode === 80) {
+      gamePaused = true;
+    }
+  });
+
+  var ctx = canvas.getContext('2d');
   var environment = new _environment.Environment(ctx, canvas);
   var fish = new _fish.Fish(300, 400, ctx);
   var rocks = [];
@@ -98,16 +128,6 @@ window.onload = function () {
     rocks.push(rockSet.top, rockSet.bottom);
   }, 500);
 
-  setInterval(function () {
-    if (!fish.dead) {
-      window.score++;
-      console.log(window.score);
-    }
-    ctx.font = "30px Verdana";
-    ctx.textAlign = 'center';
-    ctx.fillText('Score: ' + window.score, canvas.width / 3, canvas.height / 3);
-  }, 3000);
-
   function drawScore() {}
 
   setInterval(function () {
@@ -115,6 +135,7 @@ window.onload = function () {
     rocks.push(rockSet.top, rockSet.bottom);
   }, 3000);
 
+  playMusic(ctx, true);
   gameLoop();
 
   /*
@@ -123,7 +144,8 @@ window.onload = function () {
 
   ctx.fillStyle = "#FFFFFF";
   function gameLoop() {
-    playMusic(ctx, true);
+    if (gamePaused) return;
+
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     environment.update();
     environment.render();
@@ -171,6 +193,22 @@ function playMusic(ctx, play) {
   } else {
     return audio.pause();
   }
+}
+
+function fadeOut(text, canvas, context) {
+  var alpha = 1.0,
+      // full opacity
+  interval = setInterval(function () {
+    canvas.width = canvas.width; // Clears the canvas
+    context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
+    context.font = "italic 70pt Arial";
+    context.fillText(text, 200, 500);
+    alpha = alpha - 0.05; // decrease opacity (fade out)
+    if (alpha < 0) {
+      canvas.width = canvas.width;
+      clearInterval(interval);
+    }
+  }, 150);
 }
 
 /***/ }),
@@ -318,40 +356,6 @@ Rock.prototype.render = function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var Environment = exports.Environment = function Environment(ctx, canvas) {
-  this.canvas = canvas;
-  this.ctx = ctx;
-  this.bgPos = 0;
-  this.fgPos = 0;
-  this.bgSpeed = 2;
-  this.bgWidth = 3000;
-  this.bgImg = document.getElementById('bg');
-  this.song = document.getElementById('underthesea');
-};
-
-Environment.prototype.update = function () {
-  this.bgPos -= this.bgSpeed;
-  if (this.bgPos < -this.bgWidth + 1400) this.bgPos = 0;
-};
-
-Environment.prototype.render = function () {
-
-  for (var i = 0; i <= this.canvas.width / this.bgWidth; i++) {
-    //canvas == innerWidth(1500) / 1280 ~ ~2
-    this.ctx.drawImage(this.bgImg, this.bgPos + i * this.bgWidth, 0);
-  }
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 var Rock2 = exports.Rock2 = function Rock2(xpos, ypos, length, speed, ctx) {
   //add ctx;
   this.ctx = ctx;
@@ -378,6 +382,40 @@ Rock2.prototype.render = function () {
 
 
   this.ctx.restore();
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Environment = exports.Environment = function Environment(ctx, canvas) {
+  this.canvas = canvas;
+  this.ctx = ctx;
+  this.bgPos = 0;
+  this.fgPos = 0;
+  this.bgSpeed = 2;
+  this.bgWidth = 3000;
+  this.bgImg = document.getElementById('bg');
+  this.song = document.getElementById('underthesea');
+};
+
+Environment.prototype.update = function () {
+  this.bgPos -= this.bgSpeed;
+  if (this.bgPos < -this.bgWidth + 1400) this.bgPos = 0;
+};
+
+Environment.prototype.render = function (canvas, ctx) {
+
+  for (var i = 0; i <= this.canvas.width / this.bgWidth; i++) {
+    //canvas == innerWidth(1500) / 1280 ~ ~2
+    this.ctx.drawImage(this.bgImg, this.bgPos + i * this.bgWidth, 0);
+  }
 };
 
 /***/ })
