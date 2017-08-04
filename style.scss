@@ -2,15 +2,110 @@ body {
   margin: 0px;
   padding: 0px;
   background: #222222;
+  z-index: -100;
 
 }
 
 canvas {
-	background:#ffffff;
-	position:absolute;
-	top:50%;
-	left:50%;
-	margin-left:-320px;
-	margin-top:-180px;
+	// background:#ffffff;
+	// position:absolute;
+	// top:50%;
+	// left:50%;
+	// margin-left:-320px;
+	// margin-top:-180px;
+  // z-index: -100;
+}
 
+.muting {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.muting:hover {background-color: #3e8e41}
+
+.muting:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.restarting {
+  position: absolute;
+  bottom: 5%;
+  left: 20%;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.restarting:hover {background-color: #3e8e41}
+
+.restarting:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+#github-image{
+
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  padding: 10px;
+  display: unset;
+
+}
+
+#linkedin-image{
+
+  height: 80px;
+  padding: 10px;
+    display: unset;
+    display: flex;
+    flex-direction: column;
+}
+
+#portfolio-div {
+  padding-left: 2%;
+  padding-top: 5%;
+}
+
+
+.textincanvas {
+  position: absolute;
+  left: 35%;
+  top: 40%;
+  color: white;
+  text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+  animation: blinker 3s linear infinite;
+}
+
+
+@keyframes blinker {
+  50% { opacity: 0; }
 }

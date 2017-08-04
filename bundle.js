@@ -84,33 +84,92 @@ window.onload = function () {
   //game logic
   window.score = 0;
   var canvas = document.getElementById('canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = 600;
+  canvas.width = window.innerWidth * (3 / 4);
+  canvas.height = window.innerHeight * (3 / 4);
   var ctx = canvas.getContext('2d');
 
   //score
   var canvas2 = document.getElementById('canvas2');
-  canvas2.width = window.innerWidth;
-  canvas2.height = 600;
+  canvas2.width = window.innerWidth * (3 / 4);
+  canvas2.height = window.innerHeight * (3 / 4);
   var ctx2 = canvas2.getContext('2d');
 
   //lyrics
   var canvas3 = document.getElementById('canvas3');
-  canvas3.width = window.innerWidth;
-  canvas3.height = 600;
+  canvas3.width = window.innerWidth * (3 / 4);
+  canvas3.height = window.innerHeight * (3 / 4);
   var ctx3 = canvas3.getContext('2d');
 
-  ctx2.font = '48px serif';
-  ctx2.fillText('Hello world', 500, 500);
+  // ctx2.font = '48px serif';
+  // ctx2.fillText('Welcome to Sky Fish', 500, 500);
 
-  var gameStarted = false;
 
+  //game loading
+  window.gameStarted = false;
+  //resets
   document.body.addEventListener("keydown", function (event) {
 
-    if (event.keyCode === 13 && !gameStarted) {
-      gameLoop();
+    if (event.keyCode === 13 && !window.gameStarted && fish.dead) {
+      document.location.href = "";
     }
+  });
+
+  //loading screen + start logic
+  document.body.addEventListener("keydown", function (event) {
+
+    if (event.keyCode === 13 && !window.gameStarted) {
+      gameLoop();
+
+      fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
+
+      ctx.restore();
+      ctx.shadowColor = "transparent";
+
+      setTimeout(function () {
+        var rockSet = generateRock(ctx, canvas.width, canvas.height);
+        rocks.push(rockSet.top, rockSet.bottom);
+      }, 500);
+
+      setInterval(function () {
+        var rockSet = generateRock(ctx, canvas.width, canvas.height);
+        rocks.push(rockSet.top, rockSet.bottom);
+      }, 3000);
+      //game story
+
+      setTimeout(function () {
+
+        fadeOutLyrics("is lost...", canvas3, ctx3);
+      }, 7000);
+
+      setTimeout(function () {
+
+        fadeOutLyrics("can you help him back to his home?", canvas3, ctx3);
+      }, 14000);
+
+      setTimeout(function () {
+
+        fadeOutLyrics("just keep flapping... just keep flapping...", canvas3, ctx3);
+      }, 19000);
+
+      setTimeout(function () {
+
+        fadeOutLyrics("We will find his home one day!", canvas3, ctx3);
+      }, 24000);
+
+      //lyrics
+      setTimeout(function () {
+
+        fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
+      }, 41000);
+
+      setTimeout(function () {
+
+        fadeOutLyrics("Sometimes silence can seem so loud", canvas3, ctx3);
+      }, 47500);
+    }
+
     introScreen();
+    // introLoop();
   });
 
   function introScreen() {
@@ -119,47 +178,62 @@ window.onload = function () {
     ctx.fillStyle = "#0099CC";
     ctx.textAlign = "center";
 
-    canvas.width = window.innerWidth;
-    canvas.height = 600;
+    canvas.width = window.innerWidth * (3 / 4);
+    canvas.height = window.innerHeight * (3 / 4);
 
-    ctx.font = "40px Arial";
-    ctx.fillText("Flappy Fish", canvas.width / 2, canvas.height / 2);
+    var image = document.getElementById('ld');
+    var fishImage = document.getElementById('fish1');
+    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(fishImage, canvas.width / 13, canvas.height / 35, 150, 150);
 
-    ctx.fillText("Press Enter To Start", canvas.width / 2, canvas.height / 2 + 50);
+    ctx.font = "bold 60px Tahoma";
+    ctx.fillStyle = "DeepSkyBlue";
+    // ctx.strokeStyle = "DarkSlateGray";
+    ctx.shadowOffsetX = 4;
+    ctx.shadowOffsetY = 4;
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = 'rgba(0,0,255, .5)';
+
+    ctx.fillText("Flappy Fish", canvas.width / 2, canvas.height / 3);
+    // ctx.strokeText("Flappy Fish", canvas.width/2, canvas.height/2);
+    ctx.fillText("Press Enter To Start", canvas.width / 2.5, canvas.height / 2 + 50);
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(canvas.width / 19, canvas.height / 3, 150, 250);
+    ctx.shadowColor = 'transparent';
+    ctx.fillStyle = 'gray';
+    ctx.font = '24px Tahoma';
+    ctx.fillText("Instructions: ", canvas.width / 16, canvas.height / 2.5);
+    ctx.font = '18px Tahoma';
+    ctx.fillText("Be quick!", canvas.width / 16, canvas.height / 2);
+    ctx.fillText("press spacebar", canvas.width / 16, canvas.height / 1.75);
+    ctx.fillText("or ", canvas.width / 16, canvas.height / 1.625);
+    ctx.fillText("up arrow key", canvas.width / 16, canvas.height / 1.5);
+    ctx.fillText("to jump!", canvas.width / 16, canvas.height / 1.375);
+  }
+
+  function introLoop() {
+    environment.update();
+    environment.render();
   }
 
   setInterval(function () {
-    if (!fish.dead) {
-      window.score++;
-    }
     ctx2.font = "30px Verdana";
     ctx2.textAlign = 'center';
 
     ctx2.fillStyle = '#000000'; // or whatever color the background is.
-    ctx2.fillText('Score: ' + window.score, canvas2.width / 10, canvas2.height / 1.1);
+    ctx2.fillText('Score: ' + window.score, canvas2.width / 8, canvas2.height / 1.1);
     ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
     ctx2.fillStyle = '#ffffff'; // or whatever color the text should be.
-    ctx2.fillText('Your Score: ' + window.score, canvas2.width / 10, canvas2.height / 1.1);
+    ctx2.fillText('Your Score: ' + window.score, canvas2.width / 8, canvas2.height / 1.1);
   }, 500);
-
-  fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
   //Song Lyrics
 
-
-  setTimeout(function () {
-
-    fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
-  }, 41000);
-
-  setTimeout(function () {
-
-    fadeOutLyrics("Sometimes silence can seem so loud", canvas2, ctx2);
-  }, 47500);
 
   var gamePaused = false;
   //pause
   window.addEventListener('keydown', function (e) {
-    console.log(e);
+
     if (e.keyCode === 80) {
       gamePaused = true;
     }
@@ -169,17 +243,8 @@ window.onload = function () {
   var fish = new _fish.Fish(300, 400, ctx);
   var rocks = [];
   // function(xpos, ypos, length, speed, ctx)
-  setTimeout(function () {
-    var rockSet = generateRock(ctx, canvas.width, canvas.height);
-    rocks.push(rockSet.top, rockSet.bottom);
-  }, 500);
 
-  function drawScore() {}
-
-  setInterval(function () {
-    var rockSet = generateRock(ctx, canvas.width, canvas.height);
-    rocks.push(rockSet.top, rockSet.bottom);
-  }, 3000);
+  //if the game is running
 
   /*
     Main Game Loop
@@ -187,7 +252,7 @@ window.onload = function () {
 
   ctx.fillStyle = "#FFFFFF";
   function gameLoop() {
-    gameStarted = true;
+    window.gameStarted = true;
     if (gamePaused) return;
     playMusic(ctx, true);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -201,8 +266,15 @@ window.onload = function () {
     if (fish.dead) {
       drawGameOver(ctx, canvas);
       playMusic(ctx, false);
+      window.gameStarted = false;
+      window.cancelAnimationFrame(gameLoop);
       return;
     }
+    if (!fish.dead) {
+      window.score++;
+    }
+
+    if (fish.dead && window.gameStarted) {}
 
     fish.update(rocks);
     fish.render();
@@ -216,8 +288,8 @@ window.onload = function () {
 
 function generateRock(ctx, canvasWidth, canvasHeight) {
 
-  var lengthTop = Math.round(Math.random() * 300 + 10);
-  var lengthBottom = canvasHeight - 400 - lengthTop;
+  var lengthTop = Math.round(Math.random() * 200 + 10);
+  var lengthBottom = canvasHeight - 300 - lengthTop;
   var returnVal = {};
   returnVal.top = new _rock2.Rock2(canvasWidth, -5, lengthTop, 3, ctx);
   returnVal.bottom = new _rock.Rock(canvasWidth, canvasHeight + 5 - lengthBottom, lengthBottom, 3, ctx);
@@ -226,8 +298,14 @@ function generateRock(ctx, canvasWidth, canvasHeight) {
 
 function drawGameOver(ctx, canvas) {
   ctx.font = "30px Verdana";
+  ctx.fillStyle = "White";
   ctx.textAlign = 'center';
+  ctx.shadowOffsetX = 4;
+  ctx.shadowOffsetY = 4;
+  ctx.shadowBlur = 6;
+  ctx.shadowColor = 'rgba(0,255,0, .5)';
   ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+  ctx.restore();
 }
 
 function playMusic(ctx, play) {
@@ -245,8 +323,8 @@ function fadeOut(text, canvas, context) {
   interval = setInterval(function () {
     canvas.width = canvas.width; // Clears the canvas
     context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
-    context.font = "italic 70pt Arial";
-    context.fillText(text, 200, 500);
+    context.font = "italic 36pt Arial";
+    context.fillText(text, canvas.width / 8, canvas.height / 6);
     alpha = alpha - 0.05; // decrease opacity (fade out)
     if (alpha < 0) {
       canvas.width = canvas.width;
@@ -262,24 +340,8 @@ function fadeOutLyrics(text, canvas, context) {
     canvas.width = canvas.width; // Clears the canvas
     context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
     context.font = "italic 36pt Arial";
-    context.fillText(text, 100, 500);
-    alpha = alpha - 0.05; // decrease opacity (fade out)
-    if (alpha < 0) {
-      canvas.width = canvas.width;
-      clearInterval(interval);
-    }
-  }, 500);
-}
-
-function fadeOutLyricsAppend(text, canvas, context) {
-  var alpha = 1.0,
-      // full opacity
-  interval = setInterval(function () {
-    canvas.width = canvas.width; // Clears the canvas
-    context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
-    context.font = "italic 36pt Arial";
-    context.fillText(text, 100, 700);
-    alpha = alpha - 0.3; // decrease opacity (fade out)
+    context.fillText(text, canvas.width / 6, canvas.height / 1.6);
+    alpha = alpha - 0.1; // decrease opacity (fade out)
     if (alpha < 0) {
       canvas.width = canvas.width;
       clearInterval(interval);
@@ -303,8 +365,8 @@ var Fish = exports.Fish = function Fish(x, y, ctx) {
   this.x = x;
   this.y = y;
   this.velY = 0;
-  this.width = 157.8;
-  this.height = 141;
+  this.width = 78.9;
+  this.height = 70.5;
   this.ticks = 0;
   this.spriteIndex = 0;
   this.dead = false;
@@ -313,20 +375,20 @@ var Fish = exports.Fish = function Fish(x, y, ctx) {
   window.addEventListener('keydown', function (e) {
     if (e.keyCode === 32 || e.keyCode === 38) {
       //up
-      self.velY = -16;
+      self.velY = -12;
     }
   });
 };
 
 Fish.prototype.update = function (rocks) {
   this.y += this.velY;
-  this.velY += 1;
+  this.velY += .7;
   if (this.detectCollision(rocks)) {
-    // this.dead = true;
+    this.dead = true;
   }
-  if (this.dead) {
-    return;
-  }
+  // if (this.dead) {
+  //   return;
+  // }
   this.ticks++;
   if (this.ticks % 15 === 0) {
     //updates every 15 frames
@@ -342,8 +404,9 @@ Fish.prototype.render = function () {
   this.ctx.scale(-1, 1);
   var angle = this.velY / 18;
   this.ctx.rotate(angle);
-  this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY, 157.8, 141);
+  this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY, 78.9, 70.5);
   //105.2, 94
+  //78.9, 70.5
   this.ctx.restore();
 };
 

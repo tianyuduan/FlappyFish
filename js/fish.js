@@ -4,8 +4,8 @@ export const Fish = function(x,y, ctx) {
  this.x = x;
  this.y = y;
  this.velY = 0;
- this.width = 157.8;
- this.height = 141;
+ this.width = 78.9;
+ this.height = 70.5;
  this.ticks = 0;
  this.spriteIndex = 0;
  this.dead = false;
@@ -22,20 +22,20 @@ export const Fish = function(x,y, ctx) {
    window.addEventListener('keydown', function(e){
      if (e.keyCode === 32 || e.keyCode === 38) {
        //up
-       self.velY = -16;
+       self.velY = -12;
      }
    });
 };
 
 Fish.prototype.update = function(rocks) {
   this.y += this.velY;
-  this.velY += 1;
+  this.velY += .7;
   if (this.detectCollision(rocks)) {
-      // this.dead = true;
+      this.dead = true;
   }
-  if (this.dead) {
-    return;
-  }
+  // if (this.dead) {
+  //   return;
+  // }
   this.ticks++;
   if (this.ticks % 15 ===  0) {
     //updates every 15 frames
@@ -52,8 +52,9 @@ this.ctx.translate(this.x, this.y);
 this.ctx.scale(-1, 1);
 let angle = this.velY / 18;
 this.ctx.rotate(angle);
- this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY, 157.8, 141);
+ this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY, 78.9, 70.5);
 //105.2, 94
+//78.9, 70.5
 this.ctx.restore();
 };
 
