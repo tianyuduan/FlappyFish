@@ -78,6 +78,7 @@ var _rock2 = __webpack_require__(3);
 
 var _environment = __webpack_require__(4);
 
+// var port = process.env.PORT || 5000;
 window.onload = function () {
 
   //constructor
@@ -120,52 +121,55 @@ window.onload = function () {
     if (event.keyCode === 13 && !window.gameStarted) {
       gameLoop();
 
-      fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
+      if (!fish.dead) {
 
-      ctx.restore();
-      ctx.shadowColor = "transparent";
+        fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
 
-      setTimeout(function () {
-        var rockSet = generateRock(ctx, canvas.width, canvas.height);
-        rocks.push(rockSet.top, rockSet.bottom);
-      }, 500);
+        ctx.restore();
+        ctx.shadowColor = "transparent";
 
-      setInterval(function () {
-        var rockSet = generateRock(ctx, canvas.width, canvas.height);
-        rocks.push(rockSet.top, rockSet.bottom);
-      }, 3000);
-      //game story
+        setTimeout(function () {
+          var rockSet = generateRock(ctx, canvas.width, canvas.height);
+          rocks.push(rockSet.top, rockSet.bottom);
+        }, 500);
 
-      setTimeout(function () {
+        setInterval(function () {
+          var rockSet = generateRock(ctx, canvas.width, canvas.height);
+          rocks.push(rockSet.top, rockSet.bottom);
+        }, 3000);
+        //game story
 
-        fadeOutLyrics("is lost...", canvas3, ctx3);
-      }, 7000);
+        setTimeout(function () {
 
-      setTimeout(function () {
+          fadeOutLyrics("is lost...", canvas3, ctx3);
+        }, 7000);
 
-        fadeOutLyrics("can you help him back to his home?", canvas3, ctx3);
-      }, 14000);
+        setTimeout(function () {
 
-      setTimeout(function () {
+          fadeOutLyrics("can you help him back to his home?", canvas3, ctx3);
+        }, 14000);
 
-        fadeOutLyrics("just keep flapping... just keep flapping...", canvas3, ctx3);
-      }, 19000);
+        setTimeout(function () {
 
-      setTimeout(function () {
+          fadeOutLyrics("just keep flapping... just keep flapping...", canvas3, ctx3);
+        }, 19000);
 
-        fadeOutLyrics("We will find his home one day!", canvas3, ctx3);
-      }, 24000);
+        setTimeout(function () {
 
-      //lyrics
-      setTimeout(function () {
+          fadeOutLyrics("We will find his home one day!", canvas3, ctx3);
+        }, 24000);
 
-        fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
-      }, 41000);
+        //lyrics
+        setTimeout(function () {
 
-      setTimeout(function () {
+          fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
+        }, 41000);
 
-        fadeOutLyrics("Sometimes silence can seem so loud", canvas3, ctx3);
-      }, 47500);
+        setTimeout(function () {
+
+          fadeOutLyrics("Sometimes silence can seem so loud", canvas3, ctx3);
+        }, 47500);
+      }
     }
 
     introScreen();

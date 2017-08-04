@@ -6,52 +6,16 @@ body {
 
 }
 
-.muting {
-  position: absolute;
+.btn.striped-shadow.white {
+  position: absolute !important;
+  bottom: 5% !important;
+  left: 12% !important;
+}
+
+#restart {
+  position: absolute !important;
   bottom: 5%;
-  left: 5%;
-  padding: 15px 25px;
-  font-size: 24px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-}
-
-.muting:hover {background-color: #3e8e41}
-
-.muting:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-.restarting {
-  position: absolute;
-  bottom: 5%;
-  left: 20%;
-  padding: 15px 25px;
-  font-size: 24px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-}
-
-.restarting:hover {background-color: #3e8e41}
-
-.restarting:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  left: 27% !important;
 }
 
 
@@ -97,4 +61,113 @@ canvas {
 
 @keyframes blinker {
   50% { opacity: 0; }
+}
+
+#gifloading{
+  display: unset;
+  position: absolute;
+  left: 45%;
+  top: 81.5%;
+  width: 15%;
+  height: 15%;
+}
+@import 'https://fonts.googleapis.com/css?family=Bungee+Shade';
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+:focus{
+  outline: none;
+}
+
+button {
+    overflow: visible;
+    border: 0;
+  padding: 0;
+  margin: 1.8rem;
+}
+.btn.striped-shadow span {
+    display: block;
+    position: relative;
+    z-index: 2;
+    border: 5px solid;
+}
+.btn.striped-shadow.white span {
+    border-color: #fff;
+    color: #fff;
+    background: #0099ff;
+}
+
+.btn {
+    font-family: 'Bungee Shade', sans-serif;
+    height: 80px;
+    line-height: 65px;
+    display: inline-block;
+    letter-spacing: 1px;
+    position: relative;
+    font-size: 1.35rem;
+    width: 250px;
+    transition: opacity .3s,z-index .3s step-end,-webkit-transform .3s;
+    transition: opacity .3s,z-index .3s step-end,transform .3s;
+    transition: opacity .3s,z-index .3s step-end,transform .3s,-webkit-transform .3s;
+    z-index: 1;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn {
+    width: 155px;
+    height: 48px;
+    line-height: 38px;
+}
+
+button.btn.striped-shadow.white:after, button.btn.striped-shadow.white:before {
+    background-image: linear-gradient(135deg,transparent 0,transparent 5px,#fff 5px,#fff 10px,transparent 10px);
+}
+
+
+button.btn.striped-shadow:hover:before {
+    max-height: calc(100% - 10px);
+}
+
+button.btn.striped-shadow:after {
+    width: calc(100% - 4px);
+    height: 8px;
+    left: -10px;
+    bottom: -9px;
+    background-size: 15px 8px;
+    background-repeat: repeat-x;
+}
+button.btn.striped-shadow:after, button.btn.striped-shadow:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 1;
+    transition: max-height .3s,width .3s,-webkit-transform .3s;
+    transition: transform .3s,max-height .3s,width .3s;
+    transition: transform .3s,max-height .3s,width .3s,-webkit-transform .3s;
+}
+
+.btn.striped-shadow:hover {
+    -webkit-transform: translate(-12px,12px);
+    -ms-transform: translate(-12px,12px);
+    transform: translate(-12px,12px);
+  z-index: 3;
+}
+
+button.btn.striped-shadow:hover:after, button.btn.striped-shadow:hover:before {
+    -webkit-transform: translate(12px,-12px);
+    -ms-transform: translate(12px,-12px);
+    transform: translate(12px,-12px);
+}
+button.btn.striped-shadow:before {
+    width: 8px;
+    max-height: calc(100% - 5px);
+    height: 100%;
+    left: -12px;
+    bottom: -5px;
+    background-size: 8px 15px;
+    background-repeat: repeat-y;
+    background-position: 0 100%;
 }

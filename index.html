@@ -14,6 +14,7 @@
         <img id="linkedin-image" src="images/linkedin.svg"/>
       </a>
     </div>
+    <img src="images/gifofloading.gif" id='gifloading' classn='gifloadingclass' alt="">
         </div>
     </head>
     <style >
@@ -45,10 +46,13 @@
       <img src="images/380.png" id='ld' alt="">
       <img src="images/rock.png" id='rock1' alt="" style="height: 900px;">
       <img src="images/rock2.png" id='rock2' alt="" style="height: 900px;">
+
       <audio id="underthesea" src="audio/underthesea.mp3" ></audio>
       <audio id="kellyfly" src="audio/CanFly2.wav" ></audio>
-      <button id="mute" class="muting">mute</button>
-      <button id="restart" class="restarting">restart</button>
+      <div class="divMute">
+      <button id="mute" class="btn striped-shadow white"><span>Mute</span></button>
+      <div>
+      <button id="restart" class="btn striped-shadow white"><span>Restart</span></button>
 
     <script >
     document.getElementById('mute').addEventListener('click', function (evt) {
