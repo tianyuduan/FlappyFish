@@ -48,64 +48,70 @@ document.body.addEventListener("keydown", function(event){
 if(event.keyCode === 13 && !window.gameStarted){
   gameLoop();
 
-  fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
+if (! fish.dead) {
 
-  ctx.restore();
-  ctx.shadowColor = "transparent";
+    fadeOut("Skyfish The Flying Fish", canvas3, ctx3);
 
-   setTimeout(function(){
-    let rockSet = generateRock(ctx, canvas.width, canvas.height);
-    rocks.push(rockSet.top, rockSet.bottom);
-  }, 500);
+    ctx.restore();
+    ctx.shadowColor = "transparent";
 
-
-   setInterval(function(){
-     let rockSet = generateRock(ctx, canvas.width, canvas.height);
-     rocks.push(rockSet.top, rockSet.bottom);
-   }, 3000);
-   //game story
-
-   setTimeout(function(){
-
-      fadeOutLyrics("is lost...", canvas3, ctx3);
-
-   }, 7000);
-
-   setTimeout(function(){
-
-      fadeOutLyrics("can you help him back to his home?", canvas3, ctx3);
-
-   }, 14000);
-
-   setTimeout(function(){
-
-      fadeOutLyrics("just keep flapping... just keep flapping...", canvas3, ctx3);
-
-   }, 19000);
-
-   setTimeout(function(){
-
-      fadeOutLyrics("We will find his home one day!", canvas3, ctx3);
-
-   }, 24000);
+     setTimeout(function(){
+      let rockSet = generateRock(ctx, canvas.width, canvas.height);
+      rocks.push(rockSet.top, rockSet.bottom);
+    }, 500);
 
 
+     setInterval(function(){
+       let rockSet = generateRock(ctx, canvas.width, canvas.height);
+       rocks.push(rockSet.top, rockSet.bottom);
+     }, 3000);
+     //game story
+
+     setTimeout(function(){
+
+        fadeOutLyrics("is lost...", canvas3, ctx3);
+
+     }, 7000);
+
+     setTimeout(function(){
+
+        fadeOutLyrics("can you help him back to his home?", canvas3, ctx3);
+
+     }, 14000);
+
+     setTimeout(function(){
+
+        fadeOutLyrics("just keep flapping... just keep flapping...", canvas3, ctx3);
+
+     }, 19000);
+
+     setTimeout(function(){
+
+        fadeOutLyrics("We will find his home one day!", canvas3, ctx3);
+
+     }, 24000);
 
 
 
 
-   //lyrics
-   setTimeout(function(){
 
-      fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
 
-   }, 41000);
+     //lyrics
+     setTimeout(function(){
 
-   setTimeout(function(){
+        fadeOutLyrics("See, I was on the verge of breaking down", canvas3, ctx3);
 
-      fadeOutLyrics("Sometimes silence can seem so loud", canvas3, ctx3);
+     }, 41000);
 
-   }, 47500);
+     setTimeout(function(){
+
+        fadeOutLyrics("Sometimes silence can seem so loud", canvas3, ctx3);
+
+     }, 47500);
+
+
+}
+
 
 }
 
