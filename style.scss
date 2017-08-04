@@ -6,16 +6,6 @@ body {
 
 }
 
-canvas {
-	// background:#ffffff;
-	// position:absolute;
-	// top:50%;
-	// left:50%;
-	// margin-left:-320px;
-	// margin-top:-180px;
-  // z-index: -100;
-}
-
 .muting {
   position: absolute;
   bottom: 5%;
@@ -104,7 +94,6 @@ canvas {
   text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
   animation: blinker 3s linear infinite;
 }
-
 
 @keyframes blinker {
   50% { opacity: 0; }
