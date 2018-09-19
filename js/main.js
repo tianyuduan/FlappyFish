@@ -208,7 +208,6 @@ const rocks = [];
 function gameLoop() {
   window.gameStarted = true;
   if (gamePaused) return;
-  playMusic(ctx, true);
   ctx.fillRect(0,0, canvas.width, canvas.height);
   environment.update();
   environment.render();
@@ -220,7 +219,6 @@ function gameLoop() {
   });
   if (fish.dead) {
     drawGameOver(ctx, canvas);
-    playMusic(ctx, false);
     window.gameStarted = false;
     window.cancelAnimationFrame(gameLoop);
     return ;
@@ -269,18 +267,6 @@ function drawGameOver(ctx, canvas) {
   ctx.shadowColor = 'rgba(0,255,0, .5)';
   ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
   ctx.restore();
-}
-
-
-
-function playMusic(ctx, play) {
-    let audio = document.getElementById('underthesea');
-    if (play === true ) {
-      return audio.play();
-    }
-    else {
-      return audio.pause();
-    }
 }
 
 function fadeOut(text, canvas, context) {
