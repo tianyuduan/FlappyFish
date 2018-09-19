@@ -274,7 +274,7 @@ function drawGameOver(ctx, canvas) {
 
 
 function playMusic(ctx, play) {
-    let audio = document.getElementById('kellyfly');
+    let audio = document.getElementById('underthesea');
     if (play === true ) {
       return audio.play();
     }
