@@ -48,28 +48,12 @@
       <img src="images/rock2.png" id='rock2' alt="" style="height: 900px;">
 
       <audio id="underthesea" src="audio/underthesea.mp3" ></audio>
-      <div class="divMute">
-      <button id="mute" class="btn striped-shadow white"><span>Mute</span></button>
-      <div>
       <button id="restart" class="btn striped-shadow white"><span>Restart</span></button>
 
     <script >
     var audio = document.getElementById("underthesea");
-    audio.volume = 0.2;
-    
-    document.getElementById('mute').addEventListener('click', function (evt) {
-      if ( underthesea.muted ) {
-        underthesea.muted = false
-        evt.target.innerHTML = 'mute'
-      }
-      else {
-        underthesea.muted = true
-        evt.target.innerHTML = 'unmute'
-      }
-    })
-    </script>
+    audio.volume = 0.5;
 
-    <script>
     document.getElementById('restart').addEventListener('click', function (evt) {
 
       document.location.href = "";
