@@ -159,8 +159,6 @@ ctx.fillText("or ", canvas.width/ 16, canvas.height / 1.625);
 ctx.fillText("up arrow key", canvas.width/ 16, canvas.height / 1.5);
 ctx.fillText("to jump!", canvas.width/ 16, canvas.height / 1.375);
 
-
-
 }
 
 function introLoop() {
@@ -239,10 +237,6 @@ function gameLoop() {
   //   }
     window.requestAnimationFrame(gameLoop);
   }
-
-
-
-
 
 };
 
