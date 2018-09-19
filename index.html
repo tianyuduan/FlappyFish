@@ -54,6 +54,9 @@
       <button id="restart" class="btn striped-shadow white"><span>Restart</span></button>
 
     <script >
+    var audio = document.getElementById("underthesea");
+    audio.volume = 0.2;
+    
     document.getElementById('mute').addEventListener('click', function (evt) {
       if ( underthesea.muted ) {
         underthesea.muted = false
