@@ -48,7 +48,6 @@
       <img src="images/rock2.png" id='rock2' alt="" style="height: 900px;">
 
       <audio id="underthesea" src="audio/underthesea.mp3" ></audio>
-      <audio id="kellyfly" src="audio/CanFly2.wav" ></audio>
       <div class="divMute">
       <button id="mute" class="btn striped-shadow white"><span>Mute</span></button>
       <div>
@@ -56,12 +55,12 @@
 
     <script >
     document.getElementById('mute').addEventListener('click', function (evt) {
-      if ( kellyfly.muted ) {
-        kellyfly.muted = false
+      if ( underthesea.muted ) {
+        underthesea.muted = false
         evt.target.innerHTML = 'mute'
       }
       else {
-        kellyfly.muted = true
+        underthesea.muted = true
         evt.target.innerHTML = 'unmute'
       }
     })
