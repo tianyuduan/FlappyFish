@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta charset="utf-8" />
-
         <div id="SplashScreen">
           <link rel="stylesheet" type="text/css" href="style.css">
           <h1 class='textincanvas'>Press any key to continue</h1>
@@ -14,7 +13,6 @@
         <img id="linkedin-image" src="images/linkedin.svg"/>
       </a>
     </div>
-    <img src="images/gifofloading.gif" id='gifloading' classn='gifloadingclass' alt="">
         </div>
     </head>
     <style >
@@ -46,24 +44,27 @@
       <img src="images/380.png" id='ld' alt="">
       <img src="images/rock.png" id='rock1' alt="" style="height: 900px;">
       <img src="images/rock2.png" id='rock2' alt="" style="height: 900px;">
-
-      <audio id="underthesea" src="audio/underthesea.mp3" ></audio>
-      <button id="restart" class="btn striped-shadow white"><span>Restart</span></button>
+      <audio id="kellyfly" src="audio/underthesea.mp3" ></audio>
+      <button id="mute" class="muting">mute</button>
+      <button id="restart" class="restarting">restart</button>
 
     <script >
-    var audio = document.getElementById("underthesea");
-    audio.volume = 0.5;
+    var audio = document.getElementById("kellyfly");
+    audio.volume = 0.1;
 
     document.getElementById('restart').addEventListener('click', function (evt) {
 
       document.location.href = "";
-    }
+      }
     );
+
+      document.getElementById('mute').addEventListener('click', function (evt) {
+      audio.muted = true;
+        }
+    );
+
     </script>
-
       <script src="bundle.js">
-
       </script>
-
     </body>
 </html>

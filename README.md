@@ -7,7 +7,7 @@
 FlappyFish is an infinite runner type game based on FlappyBird, a side-game scroller game where the user controls a bird. The purpose of the game is to fly between rows of green pipes without hitting them. By the end of 2014, FlappyBird was the most downloaded game in the
  iOS App Store.
 
-FlappyFish was built with HTML 5 canvas. The entire game was constructed using vanilla JavaScript.
+FlappyFish was built with HTML 5 canvas. The entire game was built with vanilla javascript.
 
 ## Features & Implementation
 -will add images after I am content with the style of the game and all the components
